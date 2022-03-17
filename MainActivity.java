@@ -1,61 +1,48 @@
-package com.shamnaf.multiplication;
+package com.shamnaf.radiobutton;
 
 import android.os.Bundle;
 
-import android.widget.TextView;
-import android.widget.Button;
-import android.widget.EditText;
+
 import android.app.Activity;
 import android.view.Menu;
-import android.view.View;
-import android.view.View.OnClickListener;
+import android.widget.RadioGroup;
+import android.widget.RadioButton;
+import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.TextView;
+
 
 public class MainActivity extends Activity {
+	RadioButton rm,rf;
+	RadioGroup rg;
 	TextView t;
-	EditText e;
-	Button b;
+	
+	
 	
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        e=(EditText)findViewById(R.id.edt);
-        t=(TextView)findViewById(R.id.t);
-        t.setText("enter the number");
+        rm=(RadioButton)findViewById(R.id.rbtn1);
+        rf=(RadioButton)findViewById(R.id.rbtn2);
+        rg=(RadioGroup)findViewById(R.id.grp);
+        t=(TextView)findViewById(R.id.txt1);
        
-        b=(Button)findViewById(R.id.btn);
-        b.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				switch (v.getId()){
-					case R.id.btn:
-						StringBuffer bf=new StringBuffer();
-						
-						String s=e.getText().toString();
-						int n=Integer.parseInt(s);
-						for(int i=1;i<=10;i++)
-							{
-							int ans=i*n;
-							bf.append(i+"x"+n+"="+ans+"\n");
-							
-							}
-					 t.setText(bf);
-					break;
-					
-				}
-			}
-		});
+        rg.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+        	@Override
+        	public void onCheckedChanged(RadioGroup group,int checkdid){
+        		if(rm.isChecked())
+        			t.setText("you are a man");
+        	
+        	if(rf.isChecked())
+        		t.setText("you are a women");
+        	}
+        });
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+    
+   
     }
     
-}
+
