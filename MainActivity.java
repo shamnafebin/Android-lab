@@ -1,65 +1,59 @@
-package com.shamnaf.checkbox;
+package com.shamnaf.dialogbox;
 
 import android.os.Bundle;
 
-import android.widget.CheckBox;
-import android.widget.TextView;
-import android.widget.Button;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
-
-import android.view.View.OnClickListener;
+import android.app.DialogFragment;
+import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import android.app.AlertDialog; 
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.view.View.OnClickListener;
+
 
 public class MainActivity extends Activity {
-	CheckBox c1,c2,c3;
 	Button b;
-	TextView t;
-	
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        c1=(CheckBox)findViewById(R.id.cbox1);
-        c2=(CheckBox)findViewById(R.id.cbox2);
-        c3=(CheckBox)findViewById(R.id.cbox3);
-        b=(Button)findViewById(R.id.btn);
-        t=(TextView)findViewById(R.id.txt);
-        
+        b=(Button)findViewById(R.id.btndialog);
         b.setOnClickListener(new OnClickListener(){
-        	 @Override
-        	public void onClick(View v){
-        		String arr="";
-        		if(c1.isChecked())
-        		{
-        			arr+="\n apple is selected";
-        		}
-        		if(c2.isChecked())
-        		{
-        			arr+="\n banana is selected";
-        		}
-        		if(c3.isChecked())
-        		{
-        			arr+="\n orange is selectd";
-        			
-        		}
-        		t.setText(arr);
-        		
-        		
-        		
-        		
-        	}
-        	 
-        		
+     
+			 public void onClick(View v) {
+				// TODO Auto-generated method stub
+			   	 ShowDateTimeDialog dt=new ShowDateTimeDialog();
+        		 dt.show(getFragmentManager(),null);
+			}
         	
         });
     }
+   public class ShowDateTimeDialog extends DialogFragment{
+	   @Override
+    	public Dialog onCreateDialog(Bundle savedInstanceState){
+    		 Calendar c=Calendar.getInstance();
+    		 SimpleDateFormat sdf=new SimpleDateFormat("dd-MMM-yyy HH:mm:ss");
+    		 String strDate=sdf.format(c.getTime());
+    		 AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+    		 builder.setTitle("Date and Time");
+    		 builder.setMessage(strDate);
+    		 builder.setNeutralButton("ok",null);
+    		 return builder.create();
+    		 
+    		 
+    		 
+    		 
+    		 
+    	 }
+    	
+    }
+
+
+    
 }
-    
-
-
-    
-   
-    
-
